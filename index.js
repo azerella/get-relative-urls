@@ -1,15 +1,34 @@
-const relativeMatch = /(href|src)="(\/|..\/|(?!http)).+?"/gmi;
+const relativeURLMatch = /(href|src)=("|')(\/|..\/|(?!http)).*?('|")/gm;
 
 /**
+ * Given a string, return an array of all relative links.
  * 
- * @param {string} fileData 
+ * @param {string} stringToCheck The string to scan for relative URLs
+ * 
+ * @returns {string[]} List of relative URLs
  */
-const getRelativeURLs = ( fileData ) => {
-	let matches = fileData.match( relativeMatch )
-		// Filter out in-page links
-		.filter( item => !item.includes(`#`))
+const getRelativeURLs = ( stringToCheck ) => {
+	let matches = stringToCheck.match( relativeURLMatch );
 
-	console.log( matches );
+	if( matches && matches.length > 0 ){
+		matches = matches
+			// Filter out in-page links
+			.filter( item => !item.includes(`#`))
+			// Cleanup URLs
+			.map( item => item.replace(/(href|src)=('|")/, ''))
+			.map( item => item.replace(/\"$/, ''))
+			// Remove '../' pathing
+			.map( item => item.replace(/\.\.\//, ''))
+			// Replace '.' path with index.html
+			.map( item => item.replace(/^(\.|\/)+$/, 'index.html'))
+			// Add '/' to start of all paths
+			.map( item => item.replace(/^\/?/, '/'))
+	}
+	else{
+		return [];
+	}
+
+	return matches;
 }
 
 module.exports = getRelativeURLs;
