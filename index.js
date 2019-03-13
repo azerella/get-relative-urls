@@ -8,27 +8,31 @@ const relativeURLMatch = /(href|src)=("|')(\/|..\/|(?!http)).*?('|")/gm;
  * @returns {string[]} List of relative URLs
  */
 const getRelativeURLs = ( stringToCheck ) => {
-	let matches = stringToCheck.match( relativeURLMatch );
-
-	if( matches && matches.length > 0 ){
-		matches = matches
-			// Filter out in-page links
-			.filter( item => !item.includes(`#`))
-			// Cleanup URLs
-			.map( item => item.replace(/(href|src)=('|")/, ''))
-			.map( item => item.replace(/\"$/, ''))
-			// Remove '../' pathing
-			.map( item => item.replace(/\.\.\//, ''))
-			// Replace '.' path with index.html
-			.map( item => item.replace(/^(\.|\/)+$/, 'index.html'))
-			// Add '/' to start of all paths
-			.map( item => item.replace(/^\/?/, '/'))
+	if( stringToCheck && typeof(stringToCheck) == 'string' ){
+		let matches = stringToCheck.match( relativeURLMatch );
+	
+		if( matches && matches.length > 0 ){
+			matches = matches
+				// Filter out in-page links
+				.filter( item => !item.includes(`#`))
+				// Cleanup URLs
+				.map( item => item.replace(/(href|src)=('|")/, ''))
+				.map( item => item.replace(/\"$/, ''))
+				// Remove '../' pathing
+				.map( item => item.replace(/\.\.\//, ''))
+				// Replace '.' path with index.html
+				.map( item => item.replace(/^(\.|\/)+$/, 'index.html'))
+				// Add '/' to start of all paths
+				.map( item => item.replace(/^\/?/, '/'))
+		}
+		else{
+			return [];
+		}
+		return matches;
 	}
 	else{
 		return [];
 	}
-
-	return matches;
 }
 
 module.exports = getRelativeURLs;

@@ -15,7 +15,9 @@
     "urls",
     "relative",
     "links",
-    "href"
+    "href",
+    "find",
+    "scrape"
   ],
   "author": "Adam Zerella <hello@adamzerella.com> (https://adamzerella.com)",
   "license": "MIT",
