@@ -1,0 +1,35 @@
+{
+  "name": "get-relative-urls",
+  "version": "1.0.0",
+  "description": "Get all the relative URLs in a string",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha index.spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adamzerella/get-relative-urls.git"
+  },
+  "keywords": [
+    "get",
+    "urls",
+    "relative",
+    "links",
+    "href"
+  ],
+  "author": "Adam Zerella <hello@adamzerella.com> (https://adamzerella.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adamzerella/get-relative-urls/issues"
+  },
+  "homepage": "https://github.com/adamzerella/get-relative-urls#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.0.2"
+  },
+  "files": [
+    "index.js",
+    "index.d.ts"
+  ],
+  "types": "index.d.ts"
+}
