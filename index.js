@@ -18,12 +18,6 @@ const getRelativeURLs = ( stringToCheck ) => {
 				// Cleanup URLs
 				.map( item => item.replace(/(href|src)=('|")/, ''))
 				.map( item => item.replace(/\"$/, ''))
-				// Remove '../' pathing
-				.map( item => item.replace(/\.\.\//, ''))
-				// Replace '.' path with index.html
-				.map( item => item.replace(/^(\.|\/)+$/, 'index.html'))
-				// Add '/' to start of all paths
-				.map( item => item.replace(/^\/?/, '/'))
 		}
 		else{
 			return [];

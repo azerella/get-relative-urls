@@ -3,11 +3,11 @@ const { expect } = require('chai');
 
 describe( 'getRelativeURLs()', () => {
     it( 'Should return a relative url given a HTML string', () => {
-        expect( getRelativeURLs( '<head><script src="/assets/js/main.js"/></head>' ) ).to.eql( ['/assets/js/main.js'] );
+        expect( getRelativeURLs( '<head><script src="/../assets/js/main.js"/></head>' ) ).to.eql( ['/../assets/js/main.js'] );
     });
 
     it( 'Should return multiple relative urls given a longer HTML string', () => {
-        expect( getRelativeURLs( '<head><link rel="stylesheet" type="text/css" href="mystyle.css"><script src="/assets/js/main.js"/></head>' ) ).to.eql( ['/mystyle.css', '/assets/js/main.js'] );
+        expect( getRelativeURLs( '<head><link rel="stylesheet" type="text/css" href="mystyle.css"><script src="/assets/js/main.js"/></head>' ) ).to.eql( ['mystyle.css', '/assets/js/main.js'] );
     });
 
     it( 'Should return a empty array given no relative links', () => {
